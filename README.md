@@ -10,5 +10,6 @@ The prefix is always `*`
 - `*zerotwo`
 - `*02`
 - `*invite`
+- `*github`
 ## Other Stuff
 Contact me on Discord - Stormtorch#8984. You can make me code you bots for free, or just have a convo.

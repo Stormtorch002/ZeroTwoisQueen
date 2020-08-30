@@ -57,6 +57,6 @@ async def invite(ctx):
 async def github(ctx):
     await ctx.send(GITHUB_URL)
 
-    
+
 update_images.start()
 bot.run(TOKEN)
