@@ -8,11 +8,12 @@ from aiohttp import ClientSession
 SUB_URL = 'https://reddit.com/r/zerotwo.json'
 INVITE_URL = '<https://discord.com/oauth2/authorize?client_id=749416423889043477&scope=bot&permissions=19456&' \
              'redirect_uri=https%3A%2F%2Fgithub.com%2FStormtorch002%2FZeroTwoisQueen>'
+GITHUB_URL = 'https://github.com/Stormtorch002'
 bot = commands.AutoShardedBot(
     command_prefix='*',
     case_insensitive=True,
     help_command=None,
-    activity=Game("github.com/Stormtorch002/ZeroTwoisqueen")
+    activity=Game("github.com/Stormtorch002/ZeroTwoisQueen")
 )
 bot.image_data = []
 
@@ -50,7 +51,12 @@ async def zt(ctx):
 @bot.command()
 async def invite(ctx):
     await ctx.send(INVITE_URL)
-    
 
+
+@bot.command()
+async def github(ctx):
+    await ctx.send(GITHUB_URL)
+
+    
 update_images.start()
 bot.run(TOKEN)
