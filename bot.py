@@ -1,36 +1,46 @@
-from discord.ext import commands, tasks
+from discord.ext import commands
 from config import TOKEN
 from discord import Colour, Embed, Game
 from random import choice
 from aiohttp import ClientSession
+from time import time
 
 
-SUB_URL = 'https://reddit.com/r/zerotwo.json'
+SUB_URLS = [
+    'https://reddit.com/r/zerotwo.json?limit=420',
+    'https://reddit.com/r/mikunakano.json?limit=420',
+    'https://reddit.com/r/chika.json?limit=420'
+]
 INVITE_URL = '<https://discord.com/oauth2/authorize?client_id=749416423889043477&scope=bot&permissions=19456>'
-GITHUB_URL = 'https://github.com/Stormtorch002'
+GITHUB_URL = 'https://github.com/Stormtorch002/ZeroTwoisQueen'
 bot = commands.AutoShardedBot(
     command_prefix='*',
     case_insensitive=True,
     help_command=None,
-    activity=Game("github.com/Stormtorch002/ZeroTwoisQueen")
+    activity=Game("with new waifus! *chika, *miku")
 )
-bot.image_data = []
+bot.image_data = {}
+bot.last_updates = {}
 
 
-@tasks.loop(minutes=1)
-async def update_images():
+async def update_images(url):
     async with ClientSession() as request:
-        async with request.get(SUB_URL) as response:
+        async with request.get(url) as response:
             data = await response.json()
-    data = data['data']['children']
-    bot.image_data = data
+            data = data['data']['children']
+            bot.image_data[url] = data
 
 
-def get_image():
+async def get_image(ctx, sub_url):
+    if bot.last_updates[sub_url] + 3600 < time():
+        await update_images(sub_url)
+        bot.last_updates[sub_url] = time()
     while True:
-        post = choice(bot.image_data)['data']
-        if not post['over_18'] and not post['pinned']:
+        post = choice(bot.image_data[sub_url])['data']
+        if not (post['over_18'] and ctx.guild.id != 728371976690728961) and not post['pinned'] and \
+                post.get('url_overridden_by_dest') and not post['is_video']:
             break
+
     image_url = post['url_overridden_by_dest']
     embed = Embed(
         title=post['title'],
@@ -44,7 +54,17 @@ def get_image():
 
 @bot.command(aliases=['02', 'zerotwo'])
 async def zt(ctx):
-    await ctx.send(embed=get_image())
+    await ctx.send(embed=await get_image(ctx, SUB_URLS[0]))
+
+
+@bot.command()
+async def miku(ctx):
+    await ctx.send(embed=await get_image(ctx, SUB_URLS[1]))
+
+
+@bot.command()
+async def chika(ctx):
+    await ctx.send(embed=await get_image(ctx, SUB_URLS[2]))
 
 
 @bot.command()
@@ -57,5 +77,4 @@ async def github(ctx):
     await ctx.send(GITHUB_URL)
 
 
-update_images.start()
 bot.run(TOKEN)
