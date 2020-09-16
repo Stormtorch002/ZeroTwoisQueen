@@ -10,8 +10,8 @@ SUB_URLS = [
     'https://reddit.com/r/ZeroTwo.json?limit=420',
     'https://reddit.com/r/MikuNakano.json?limit=420',
     'https://reddit.com/r/CHIKA.json?limit=420',
-    'https://www.reddit.com/r/Hayasaka?limit=420',
-    'https://www.reddit.com/r/Mami?limit=420'
+    'https://reddit.com/r/Hayasaka.json?limit=420',
+    'https://reddit.com/r/Mami.json?limit=420'
 ]
 INVITE_URL = '<https://discord.com/oauth2/authorize?client_id=749416423889043477&scope=bot&permissions=19456>'
 GITHUB_URL = 'https://github.com/Stormtorch002/ZeroTwoisQueen'
