@@ -7,9 +7,11 @@ from time import time
 
 
 SUB_URLS = [
-    'https://reddit.com/r/zerotwo.json?limit=420',
-    'https://reddit.com/r/mikunakano.json?limit=420',
-    'https://reddit.com/r/chika.json?limit=420'
+    'https://reddit.com/r/ZeroTwo.json?limit=420',
+    'https://reddit.com/r/MikuNakano.json?limit=420',
+    'https://reddit.com/r/CHIKA.json?limit=420',
+    'https://www.reddit.com/r/Hayasaka?limit=420',
+    'https://www.reddit.com/r/Mami?limit=420'
 ]
 INVITE_URL = '<https://discord.com/oauth2/authorize?client_id=749416423889043477&scope=bot&permissions=19456>'
 GITHUB_URL = 'https://github.com/Stormtorch002/ZeroTwoisQueen'
@@ -17,7 +19,7 @@ bot = commands.AutoShardedBot(
     command_prefix='*',
     case_insensitive=True,
     help_command=None,
-    activity=Game("with new waifus! *chika, *miku")
+    activity=Game("with new waifus! *chika, *miku, *hayasaka, *mami")
 )
 bot.image_data = {}
 bot.last_updates = {url: 0 for url in SUB_URLS}
@@ -65,6 +67,16 @@ async def miku(ctx):
 @bot.command()
 async def chika(ctx):
     await ctx.send(embed=await get_image(ctx, SUB_URLS[2]))
+
+
+@bot.command(aliases=['hayasaka'])
+async def ai(ctx):
+    await ctx.send(embed=await get_image(ctx, SUB_URLS[3]))
+
+
+@bot.command()
+async def mami(ctx):
+    await ctx.send(embed=await get_image(ctx, SUB_URLS[4]))
 
 
 @bot.command()
