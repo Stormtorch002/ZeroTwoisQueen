@@ -45,7 +45,7 @@ async def get_image(ctx, sub_url):
     embed = Embed(
         title=post['title'],
         color=Colour.magenta(),
-        url='https://reddit.com/' + post['permalink'].replace('//r/', '/r/')
+        url='https://reddit.com' + post['permalink']
     )
     embed.set_image(url=image_url)
     embed.set_footer(text='u/' + post['author'])
