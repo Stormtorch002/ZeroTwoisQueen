@@ -20,7 +20,7 @@ bot = commands.AutoShardedBot(
     activity=Game("with new waifus! *chika, *miku")
 )
 bot.image_data = {}
-bot.last_updates = {}
+bot.last_updates = {url: 0 for url in SUB_URLS}
 
 
 async def update_images(url):
