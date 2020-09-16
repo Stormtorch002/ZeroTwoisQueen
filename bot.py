@@ -12,7 +12,11 @@ SUB_URLS = [
     'https://reddit.com/r/CHIKA.json?limit=420',
     'https://reddit.com/r/Hayasaka.json?limit=420',
     'https://reddit.com/r/Mami.json?limit=420',
-    'https://reddit.com/r/MikoIino.json?limit=420'
+    'https://reddit.com/r/MikoIino.json?limit=420',
+    'https://reddit.com/r/Yukinoshitayukino.json?limit=420',
+    'https://reddit.com/r/OneTrueTohsaka.json?limit=420',
+    'https://reddit.com/r/IchigoAndZerotwo.json?limit=420',
+    'https://reddit.com/r/hentai.json?limit=420'
 ]
 INVITE_URL = '<https://discord.com/oauth2/authorize?client_id=749416423889043477&scope=bot&permissions=19456>'
 GITHUB_URL = 'https://github.com/Stormtorch002/ZeroTwoisQueen'
@@ -20,7 +24,7 @@ bot = commands.AutoShardedBot(
     command_prefix='*',
     case_insensitive=True,
     help_command=None,
-    activity=Game("with new waifus! *chika, *miku, *hayasaka, *mami, *miko")
+    activity=Game("waifus)))")
 )
 bot.image_data = {}
 bot.last_updates = {url: 0 for url in SUB_URLS}
@@ -83,6 +87,28 @@ async def mami(ctx):
 @bot.command()
 async def miko(ctx):
     await ctx.send(embed=await get_image(ctx, SUB_URLS[5]))
+
+
+@bot.command()
+async def yukino(ctx):
+    await ctx.send(embed=await get_image(ctx, SUB_URLS[6]))
+
+
+@bot.command()
+async def tohsaka(ctx):
+    await ctx.send(embed=await get_image(ctx, SUB_URLS[7]))
+
+
+@bot.command()
+async def ichigo(ctx):
+    await ctx.send(embed=await get_image(ctx, SUB_URLS[8]))
+
+
+@bot.command()
+async def hentai(ctx):
+    if not ctx.channel.is_nsfw():
+        return await ctx.send('Can only be used in NSFW channels.')
+    await ctx.send(embed=await get_image(ctx, SUB_URLS[9]))
 
 
 @bot.command()
