@@ -10,7 +10,7 @@ bot = commands.AutoShardedBot(
     help_command=None,
     activity=Game("waifus)))")
 )
-bot.load_extension('cogs.waifus')
+bot.load_extension('waifus')
 bot.load_extension('jishaku')
 
 
